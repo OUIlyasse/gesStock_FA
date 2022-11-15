@@ -55,8 +55,7 @@
             // 
             // frmListPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(882, 553);
             this.Controls.Add(this.btnAdd);
             this.Font = new System.Drawing.Font("Calibri", 10.2F);

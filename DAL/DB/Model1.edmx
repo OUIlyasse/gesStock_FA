@@ -1,0 +1,1512 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="gesStock_FAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="art_Code" />
+          </Key>
+          <Property Name="art_Code" Type="int" Nullable="false" />
+          <Property Name="art_Designatiion" Type="nvarchar" MaxLength="200" />
+          <Property Name="art_Description" Type="nvarchar(max)" />
+          <Property Name="svc_Code" Type="int" />
+          <Property Name="fam_Code" Type="int" />
+          <Property Name="msr_Code" Type="int" />
+        </EntityType>
+        <EntityType Name="BL_Article">
+          <Key>
+            <PropertyRef Name="bl_A_Code" />
+          </Key>
+          <Property Name="bl_A_Code" Type="int" Nullable="false" />
+          <Property Name="bl_A_Date" Type="datetime" />
+          <Property Name="bl_Code" Type="int" />
+          <Property Name="art_Code" Type="int" />
+          <Property Name="ref_Code" Type="int" />
+          <Property Name="cb_Code" Type="int" />
+        </EntityType>
+        <EntityType Name="Bon_Livraison">
+          <Key>
+            <PropertyRef Name="bl_Code" />
+          </Key>
+          <Property Name="bl_Code" Type="int" Nullable="false" />
+          <Property Name="bl_Date" Type="datetime" />
+          <Property Name="bl_Reference" Type="nvarchar(max)" />
+          <Property Name="frns_Code" Type="int" />
+          <Property Name="unit_Code" Type="int" />
+          <Property Name="typ_Code" Type="int" />
+          <Property Name="bl_Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CodeBarre">
+          <Key>
+            <PropertyRef Name="cb_code" />
+          </Key>
+          <Property Name="cb_code" Type="int" Nullable="false" />
+          <Property Name="cb_Date" Type="datetime" />
+          <Property Name="cb_Designation" Type="nvarchar(max)" />
+          <Property Name="ref_Code" Type="int" />
+          <Property Name="typ_Code" Type="int" />
+          <Property Name="cb_Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Emplacement">
+          <Key>
+            <PropertyRef Name="eplc_Code" />
+          </Key>
+          <Property Name="eplc_Code" Type="int" Nullable="false" />
+          <Property Name="eplc_Date" Type="datetime" />
+          <Property Name="ref_Code" Type="int" />
+          <Property Name="rayo_Code" Type="int" />
+          <Property Name="etgr_Code" Type="int" />
+          <Property Name="mags_Code" Type="int" />
+        </EntityType>
+        <EntityType Name="Etager">
+          <Key>
+            <PropertyRef Name="etgr_Code" />
+          </Key>
+          <Property Name="etgr_Code" Type="int" Nullable="false" />
+          <Property Name="etgr_Designation" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Famille">
+          <Key>
+            <PropertyRef Name="fam_Code" />
+          </Key>
+          <Property Name="fam_Code" Type="int" Nullable="false" />
+          <Property Name="fam_Designation" Type="nvarchar" MaxLength="200" />
+          <Property Name="fam_Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Fournisseur">
+          <Key>
+            <PropertyRef Name="frns_Code" />
+          </Key>
+          <Property Name="frns_Code" Type="int" Nullable="false" />
+          <Property Name="frns_Nom" Type="nvarchar" MaxLength="500" />
+          <Property Name="frns_Adresse" Type="nvarchar(max)" />
+          <Property Name="frns_Adresse2" Type="nvarchar(max)" />
+          <Property Name="frns_Code_Postal" Type="nvarchar(max)" />
+          <Property Name="frns_Ville" Type="nvarchar(max)" />
+          <Property Name="frns_Email" Type="nvarchar(max)" />
+          <Property Name="frns_GSM" Type="nvarchar(max)" />
+          <Property Name="frns_GSM2" Type="nvarchar(max)" />
+          <Property Name="frns_Fixe1" Type="nvarchar(max)" />
+          <Property Name="frns_Fixe2" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Magasin">
+          <Key>
+            <PropertyRef Name="mags_Code" />
+          </Key>
+          <Property Name="mags_Code" Type="int" Nullable="false" />
+          <Property Name="mags_Magasin" Type="nvarchar" MaxLength="500" />
+          <Property Name="mags_Ville" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Mvt_Stock">
+          <Key>
+            <PropertyRef Name="mvt_Code" />
+          </Key>
+          <Property Name="mvt_Code" Type="int" Nullable="false" />
+          <Property Name="mvt_Date" Type="date" />
+          <Property Name="mvt_Doc_Refference" Type="nvarchar(max)" />
+          <Property Name="frns_Code" Type="int" />
+          <Property Name="unit_Code" Type="int" />
+          <Property Name="typ_Code" Type="int" />
+          <Property Name="mvt_Qte_Demandee" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="mvt_Qte_Livree" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="msr_Code" Type="int" />
+          <Property Name="bl_A_Code" Type="int" />
+          <Property Name="mvt_Obsrvation" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Operation_Type">
+          <Key>
+            <PropertyRef Name="typ_Code" />
+          </Key>
+          <Property Name="typ_Code" Type="int" Nullable="false" />
+          <Property Name="typ_Designation" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="pho_Code" />
+          </Key>
+          <Property Name="pho_Code" Type="int" Nullable="false" />
+          <Property Name="pho_Path" Type="nvarchar(max)" />
+          <Property Name="pho_Nom" Type="nvarchar(max)" />
+          <Property Name="art_Code" Type="int" />
+        </EntityType>
+        <EntityType Name="Rayonnage">
+          <Key>
+            <PropertyRef Name="rayo_Code" />
+          </Key>
+          <Property Name="rayo_Code" Type="int" Nullable="false" />
+          <Property Name="rayo_Designation" Type="nvarchar" MaxLength="200" />
+          <Property Name="etgr_Code" Type="int" />
+        </EntityType>
+        <EntityType Name="Reference">
+          <Key>
+            <PropertyRef Name="ref_Code" />
+          </Key>
+          <Property Name="ref_Code" Type="int" Nullable="false" />
+          <Property Name="art_Code" Type="int" />
+          <Property Name="ref_reference" Type="nvarchar(max)" />
+          <Property Name="ref_Qte" Type="int" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="svc_Code" />
+          </Key>
+          <Property Name="svc_Code" Type="int" Nullable="false" />
+          <Property Name="svc_Designation" Type="nvarchar" MaxLength="500" />
+          <Property Name="mags_Code" Type="int" />
+        </EntityType>
+        <EntityType Name="Unite">
+          <Key>
+            <PropertyRef Name="unit_Code" />
+          </Key>
+          <Property Name="unit_Code" Type="int" Nullable="false" />
+          <Property Name="unit_Unite" Type="nvarchar(max)" />
+          <Property Name="unit_Ville" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Unite_Mesure">
+          <Key>
+            <PropertyRef Name="msr_Code" />
+          </Key>
+          <Property Name="msr_Code" Type="int" Nullable="false" />
+          <Property Name="msr_Unite_Mesure" Type="nvarchar" MaxLength="500" />
+          <Property Name="msr_Abreviation" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Vehicule">
+          <Key>
+            <PropertyRef Name="Veh_Code" />
+          </Key>
+          <Property Name="Veh_Code" Type="int" Nullable="false" />
+          <Property Name="Veh_Vehicule" Type="nvarchar(max)" />
+          <Property Name="ref_Code" Type="int" />
+        </EntityType>
+        <Association Name="FK_Article_Famille">
+          <End Role="Famille" Type="Self.Famille" Multiplicity="0..1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Famille">
+              <PropertyRef Name="fam_Code" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="fam_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Article_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="svc_Code" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="svc_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Article_Unite_Mesure">
+          <End Role="Unite_Mesure" Type="Self.Unite_Mesure" Multiplicity="0..1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unite_Mesure">
+              <PropertyRef Name="msr_Code" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="msr_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BL_Article_Article">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="BL_Article" Type="Self.BL_Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="art_Code" />
+            </Principal>
+            <Dependent Role="BL_Article">
+              <PropertyRef Name="art_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BL_Article_Bon_Livraison">
+          <End Role="Bon_Livraison" Type="Self.Bon_Livraison" Multiplicity="0..1" />
+          <End Role="BL_Article" Type="Self.BL_Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bon_Livraison">
+              <PropertyRef Name="bl_Code" />
+            </Principal>
+            <Dependent Role="BL_Article">
+              <PropertyRef Name="bl_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BL_Article_CodeBarre">
+          <End Role="CodeBarre" Type="Self.CodeBarre" Multiplicity="0..1" />
+          <End Role="BL_Article" Type="Self.BL_Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CodeBarre">
+              <PropertyRef Name="cb_code" />
+            </Principal>
+            <Dependent Role="BL_Article">
+              <PropertyRef Name="cb_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BL_Article_Reference">
+          <End Role="Reference" Type="Self.Reference" Multiplicity="0..1" />
+          <End Role="BL_Article" Type="Self.BL_Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reference">
+              <PropertyRef Name="ref_Code" />
+            </Principal>
+            <Dependent Role="BL_Article">
+              <PropertyRef Name="ref_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bon_Livraison_Fournisseur">
+          <End Role="Fournisseur" Type="Self.Fournisseur" Multiplicity="0..1" />
+          <End Role="Bon_Livraison" Type="Self.Bon_Livraison" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fournisseur">
+              <PropertyRef Name="frns_Code" />
+            </Principal>
+            <Dependent Role="Bon_Livraison">
+              <PropertyRef Name="frns_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bon_Livraison_Operation_Type">
+          <End Role="Operation_Type" Type="Self.Operation_Type" Multiplicity="0..1" />
+          <End Role="Bon_Livraison" Type="Self.Bon_Livraison" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation_Type">
+              <PropertyRef Name="typ_Code" />
+            </Principal>
+            <Dependent Role="Bon_Livraison">
+              <PropertyRef Name="typ_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bon_Livraison_Unite">
+          <End Role="Unite" Type="Self.Unite" Multiplicity="0..1" />
+          <End Role="Bon_Livraison" Type="Self.Bon_Livraison" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unite">
+              <PropertyRef Name="unit_Code" />
+            </Principal>
+            <Dependent Role="Bon_Livraison">
+              <PropertyRef Name="unit_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CodeBarre_Operation_Type">
+          <End Role="Operation_Type" Type="Self.Operation_Type" Multiplicity="0..1" />
+          <End Role="CodeBarre" Type="Self.CodeBarre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation_Type">
+              <PropertyRef Name="typ_Code" />
+            </Principal>
+            <Dependent Role="CodeBarre">
+              <PropertyRef Name="typ_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CodeBarre_Reference">
+          <End Role="Reference" Type="Self.Reference" Multiplicity="0..1" />
+          <End Role="CodeBarre" Type="Self.CodeBarre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reference">
+              <PropertyRef Name="ref_Code" />
+            </Principal>
+            <Dependent Role="CodeBarre">
+              <PropertyRef Name="ref_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emplacement_Etager">
+          <End Role="Etager" Type="Self.Etager" Multiplicity="0..1" />
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etager">
+              <PropertyRef Name="etgr_Code" />
+            </Principal>
+            <Dependent Role="Emplacement">
+              <PropertyRef Name="etgr_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emplacement_Magasin">
+          <End Role="Magasin" Type="Self.Magasin" Multiplicity="0..1" />
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magasin">
+              <PropertyRef Name="mags_Code" />
+            </Principal>
+            <Dependent Role="Emplacement">
+              <PropertyRef Name="mags_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emplacement_Rayonnage">
+          <End Role="Rayonnage" Type="Self.Rayonnage" Multiplicity="0..1" />
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rayonnage">
+              <PropertyRef Name="rayo_Code" />
+            </Principal>
+            <Dependent Role="Emplacement">
+              <PropertyRef Name="rayo_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emplacement_Reference">
+          <End Role="Reference" Type="Self.Reference" Multiplicity="0..1" />
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reference">
+              <PropertyRef Name="ref_Code" />
+            </Principal>
+            <Dependent Role="Emplacement">
+              <PropertyRef Name="ref_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mvt_Stock_Fournisseur">
+          <End Role="Fournisseur" Type="Self.Fournisseur" Multiplicity="0..1" />
+          <End Role="Mvt_Stock" Type="Self.Mvt_Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fournisseur">
+              <PropertyRef Name="frns_Code" />
+            </Principal>
+            <Dependent Role="Mvt_Stock">
+              <PropertyRef Name="frns_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mvt_Stock_Mvt_Stock">
+          <End Role="BL_Article" Type="Self.BL_Article" Multiplicity="0..1" />
+          <End Role="Mvt_Stock" Type="Self.Mvt_Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BL_Article">
+              <PropertyRef Name="bl_A_Code" />
+            </Principal>
+            <Dependent Role="Mvt_Stock">
+              <PropertyRef Name="bl_A_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mvt_Stock_Operation_Type">
+          <End Role="Operation_Type" Type="Self.Operation_Type" Multiplicity="0..1" />
+          <End Role="Mvt_Stock" Type="Self.Mvt_Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation_Type">
+              <PropertyRef Name="typ_Code" />
+            </Principal>
+            <Dependent Role="Mvt_Stock">
+              <PropertyRef Name="typ_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mvt_Stock_Unite">
+          <End Role="Unite" Type="Self.Unite" Multiplicity="0..1" />
+          <End Role="Mvt_Stock" Type="Self.Mvt_Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unite">
+              <PropertyRef Name="unit_Code" />
+            </Principal>
+            <Dependent Role="Mvt_Stock">
+              <PropertyRef Name="unit_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mvt_Stock_Unite_Mesure">
+          <End Role="Unite_Mesure" Type="Self.Unite_Mesure" Multiplicity="0..1" />
+          <End Role="Mvt_Stock" Type="Self.Mvt_Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unite_Mesure">
+              <PropertyRef Name="msr_Code" />
+            </Principal>
+            <Dependent Role="Mvt_Stock">
+              <PropertyRef Name="msr_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_Article">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="art_Code" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="art_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rayonnage_Etager">
+          <End Role="Etager" Type="Self.Etager" Multiplicity="0..1" />
+          <End Role="Rayonnage" Type="Self.Rayonnage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etager">
+              <PropertyRef Name="etgr_Code" />
+            </Principal>
+            <Dependent Role="Rayonnage">
+              <PropertyRef Name="etgr_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reference_Article">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="Reference" Type="Self.Reference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="art_Code" />
+            </Principal>
+            <Dependent Role="Reference">
+              <PropertyRef Name="art_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Magasin">
+          <End Role="Magasin" Type="Self.Magasin" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magasin">
+              <PropertyRef Name="mags_Code" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="mags_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicule_Reference">
+          <End Role="Reference" Type="Self.Reference" Multiplicity="0..1" />
+          <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reference">
+              <PropertyRef Name="ref_Code" />
+            </Principal>
+            <Dependent Role="Vehicule">
+              <PropertyRef Name="ref_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="gesStock_FAModelStoreContainer">
+          <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BL_Article" EntityType="Self.BL_Article" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bon_Livraison" EntityType="Self.Bon_Livraison" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CodeBarre" EntityType="Self.CodeBarre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emplacement" EntityType="Self.Emplacement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Etager" EntityType="Self.Etager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Famille" EntityType="Self.Famille" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fournisseur" EntityType="Self.Fournisseur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Magasin" EntityType="Self.Magasin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mvt_Stock" EntityType="Self.Mvt_Stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Operation_Type" EntityType="Self.Operation_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rayonnage" EntityType="Self.Rayonnage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reference" EntityType="Self.Reference" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unite" EntityType="Self.Unite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unite_Mesure" EntityType="Self.Unite_Mesure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehicule" EntityType="Self.Vehicule" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Article_Famille" Association="Self.FK_Article_Famille">
+            <End Role="Famille" EntitySet="Famille" />
+            <End Role="Article" EntitySet="Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Article_Service" Association="Self.FK_Article_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Article" EntitySet="Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Article_Unite_Mesure" Association="Self.FK_Article_Unite_Mesure">
+            <End Role="Unite_Mesure" EntitySet="Unite_Mesure" />
+            <End Role="Article" EntitySet="Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BL_Article_Article" Association="Self.FK_BL_Article_Article">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="BL_Article" EntitySet="BL_Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BL_Article_Bon_Livraison" Association="Self.FK_BL_Article_Bon_Livraison">
+            <End Role="Bon_Livraison" EntitySet="Bon_Livraison" />
+            <End Role="BL_Article" EntitySet="BL_Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BL_Article_CodeBarre" Association="Self.FK_BL_Article_CodeBarre">
+            <End Role="CodeBarre" EntitySet="CodeBarre" />
+            <End Role="BL_Article" EntitySet="BL_Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BL_Article_Reference" Association="Self.FK_BL_Article_Reference">
+            <End Role="Reference" EntitySet="Reference" />
+            <End Role="BL_Article" EntitySet="BL_Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bon_Livraison_Fournisseur" Association="Self.FK_Bon_Livraison_Fournisseur">
+            <End Role="Fournisseur" EntitySet="Fournisseur" />
+            <End Role="Bon_Livraison" EntitySet="Bon_Livraison" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bon_Livraison_Operation_Type" Association="Self.FK_Bon_Livraison_Operation_Type">
+            <End Role="Operation_Type" EntitySet="Operation_Type" />
+            <End Role="Bon_Livraison" EntitySet="Bon_Livraison" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bon_Livraison_Unite" Association="Self.FK_Bon_Livraison_Unite">
+            <End Role="Unite" EntitySet="Unite" />
+            <End Role="Bon_Livraison" EntitySet="Bon_Livraison" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CodeBarre_Operation_Type" Association="Self.FK_CodeBarre_Operation_Type">
+            <End Role="Operation_Type" EntitySet="Operation_Type" />
+            <End Role="CodeBarre" EntitySet="CodeBarre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CodeBarre_Reference" Association="Self.FK_CodeBarre_Reference">
+            <End Role="Reference" EntitySet="Reference" />
+            <End Role="CodeBarre" EntitySet="CodeBarre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emplacement_Etager" Association="Self.FK_Emplacement_Etager">
+            <End Role="Etager" EntitySet="Etager" />
+            <End Role="Emplacement" EntitySet="Emplacement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emplacement_Magasin" Association="Self.FK_Emplacement_Magasin">
+            <End Role="Magasin" EntitySet="Magasin" />
+            <End Role="Emplacement" EntitySet="Emplacement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emplacement_Rayonnage" Association="Self.FK_Emplacement_Rayonnage">
+            <End Role="Rayonnage" EntitySet="Rayonnage" />
+            <End Role="Emplacement" EntitySet="Emplacement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emplacement_Reference" Association="Self.FK_Emplacement_Reference">
+            <End Role="Reference" EntitySet="Reference" />
+            <End Role="Emplacement" EntitySet="Emplacement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mvt_Stock_Fournisseur" Association="Self.FK_Mvt_Stock_Fournisseur">
+            <End Role="Fournisseur" EntitySet="Fournisseur" />
+            <End Role="Mvt_Stock" EntitySet="Mvt_Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mvt_Stock_Mvt_Stock" Association="Self.FK_Mvt_Stock_Mvt_Stock">
+            <End Role="BL_Article" EntitySet="BL_Article" />
+            <End Role="Mvt_Stock" EntitySet="Mvt_Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mvt_Stock_Operation_Type" Association="Self.FK_Mvt_Stock_Operation_Type">
+            <End Role="Operation_Type" EntitySet="Operation_Type" />
+            <End Role="Mvt_Stock" EntitySet="Mvt_Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mvt_Stock_Unite" Association="Self.FK_Mvt_Stock_Unite">
+            <End Role="Unite" EntitySet="Unite" />
+            <End Role="Mvt_Stock" EntitySet="Mvt_Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mvt_Stock_Unite_Mesure" Association="Self.FK_Mvt_Stock_Unite_Mesure">
+            <End Role="Unite_Mesure" EntitySet="Unite_Mesure" />
+            <End Role="Mvt_Stock" EntitySet="Mvt_Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_Article" Association="Self.FK_Photo_Article">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rayonnage_Etager" Association="Self.FK_Rayonnage_Etager">
+            <End Role="Etager" EntitySet="Etager" />
+            <End Role="Rayonnage" EntitySet="Rayonnage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_Article" Association="Self.FK_Reference_Article">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="Reference" EntitySet="Reference" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Magasin" Association="Self.FK_Service_Magasin">
+            <End Role="Magasin" EntitySet="Magasin" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicule_Reference" Association="Self.FK_Vehicule_Reference">
+            <End Role="Reference" EntitySet="Reference" />
+            <End Role="Vehicule" EntitySet="Vehicule" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="gesStock_FAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="art_Code" />
+          </Key>
+          <Property Name="art_Code" Type="Int32" Nullable="false" />
+          <Property Name="art_Designatiion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="art_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="svc_Code" Type="Int32" />
+          <Property Name="fam_Code" Type="Int32" />
+          <Property Name="msr_Code" Type="Int32" />
+          <NavigationProperty Name="Famille" Relationship="Self.FK_Article_Famille" FromRole="Article" ToRole="Famille" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_Article_Service" FromRole="Article" ToRole="Service" />
+          <NavigationProperty Name="Unite_Mesure" Relationship="Self.FK_Article_Unite_Mesure" FromRole="Article" ToRole="Unite_Mesure" />
+          <NavigationProperty Name="BL_Article" Relationship="Self.FK_BL_Article_Article" FromRole="Article" ToRole="BL_Article" />
+          <NavigationProperty Name="Photos" Relationship="Self.FK_Photo_Article" FromRole="Article" ToRole="Photo" />
+          <NavigationProperty Name="References" Relationship="Self.FK_Reference_Article" FromRole="Article" ToRole="Reference" />
+        </EntityType>
+        <EntityType Name="BL_Article">
+          <Key>
+            <PropertyRef Name="bl_A_Code" />
+          </Key>
+          <Property Name="bl_A_Code" Type="Int32" Nullable="false" />
+          <Property Name="bl_A_Date" Type="DateTime" Precision="3" />
+          <Property Name="bl_Code" Type="Int32" />
+          <Property Name="art_Code" Type="Int32" />
+          <Property Name="ref_Code" Type="Int32" />
+          <Property Name="cb_Code" Type="Int32" />
+          <NavigationProperty Name="Article" Relationship="Self.FK_BL_Article_Article" FromRole="BL_Article" ToRole="Article" />
+          <NavigationProperty Name="Bon_Livraison" Relationship="Self.FK_BL_Article_Bon_Livraison" FromRole="BL_Article" ToRole="Bon_Livraison" />
+          <NavigationProperty Name="CodeBarre" Relationship="Self.FK_BL_Article_CodeBarre" FromRole="BL_Article" ToRole="CodeBarre" />
+          <NavigationProperty Name="Reference" Relationship="Self.FK_BL_Article_Reference" FromRole="BL_Article" ToRole="Reference" />
+          <NavigationProperty Name="Mvt_Stock" Relationship="Self.FK_Mvt_Stock_Mvt_Stock" FromRole="BL_Article" ToRole="Mvt_Stock" />
+        </EntityType>
+        <EntityType Name="Bon_Livraison">
+          <Key>
+            <PropertyRef Name="bl_Code" />
+          </Key>
+          <Property Name="bl_Code" Type="Int32" Nullable="false" />
+          <Property Name="bl_Date" Type="DateTime" Precision="3" />
+          <Property Name="bl_Reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="frns_Code" Type="Int32" />
+          <Property Name="unit_Code" Type="Int32" />
+          <Property Name="typ_Code" Type="Int32" />
+          <Property Name="bl_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BL_Article" Relationship="Self.FK_BL_Article_Bon_Livraison" FromRole="Bon_Livraison" ToRole="BL_Article" />
+          <NavigationProperty Name="Fournisseur" Relationship="Self.FK_Bon_Livraison_Fournisseur" FromRole="Bon_Livraison" ToRole="Fournisseur" />
+          <NavigationProperty Name="Operation_Type" Relationship="Self.FK_Bon_Livraison_Operation_Type" FromRole="Bon_Livraison" ToRole="Operation_Type" />
+          <NavigationProperty Name="Unite" Relationship="Self.FK_Bon_Livraison_Unite" FromRole="Bon_Livraison" ToRole="Unite" />
+        </EntityType>
+        <EntityType Name="CodeBarre">
+          <Key>
+            <PropertyRef Name="cb_code" />
+          </Key>
+          <Property Name="cb_code" Type="Int32" Nullable="false" />
+          <Property Name="cb_Date" Type="DateTime" Precision="3" />
+          <Property Name="cb_Designation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ref_Code" Type="Int32" />
+          <Property Name="typ_Code" Type="Int32" />
+          <Property Name="cb_Status" Type="Boolean" />
+          <NavigationProperty Name="BL_Article" Relationship="Self.FK_BL_Article_CodeBarre" FromRole="CodeBarre" ToRole="BL_Article" />
+          <NavigationProperty Name="Operation_Type" Relationship="Self.FK_CodeBarre_Operation_Type" FromRole="CodeBarre" ToRole="Operation_Type" />
+          <NavigationProperty Name="Reference" Relationship="Self.FK_CodeBarre_Reference" FromRole="CodeBarre" ToRole="Reference" />
+        </EntityType>
+        <EntityType Name="Emplacement">
+          <Key>
+            <PropertyRef Name="eplc_Code" />
+          </Key>
+          <Property Name="eplc_Code" Type="Int32" Nullable="false" />
+          <Property Name="eplc_Date" Type="DateTime" Precision="3" />
+          <Property Name="ref_Code" Type="Int32" />
+          <Property Name="rayo_Code" Type="Int32" />
+          <Property Name="etgr_Code" Type="Int32" />
+          <Property Name="mags_Code" Type="Int32" />
+          <NavigationProperty Name="Etager" Relationship="Self.FK_Emplacement_Etager" FromRole="Emplacement" ToRole="Etager" />
+          <NavigationProperty Name="Magasin" Relationship="Self.FK_Emplacement_Magasin" FromRole="Emplacement" ToRole="Magasin" />
+          <NavigationProperty Name="Rayonnage" Relationship="Self.FK_Emplacement_Rayonnage" FromRole="Emplacement" ToRole="Rayonnage" />
+          <NavigationProperty Name="Reference" Relationship="Self.FK_Emplacement_Reference" FromRole="Emplacement" ToRole="Reference" />
+        </EntityType>
+        <EntityType Name="Etager">
+          <Key>
+            <PropertyRef Name="etgr_Code" />
+          </Key>
+          <Property Name="etgr_Code" Type="Int32" Nullable="false" />
+          <Property Name="etgr_Designation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Emplacements" Relationship="Self.FK_Emplacement_Etager" FromRole="Etager" ToRole="Emplacement" />
+          <NavigationProperty Name="Rayonnages" Relationship="Self.FK_Rayonnage_Etager" FromRole="Etager" ToRole="Rayonnage" />
+        </EntityType>
+        <EntityType Name="Famille">
+          <Key>
+            <PropertyRef Name="fam_Code" />
+          </Key>
+          <Property Name="fam_Code" Type="Int32" Nullable="false" />
+          <Property Name="fam_Designation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="fam_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Articles" Relationship="Self.FK_Article_Famille" FromRole="Famille" ToRole="Article" />
+        </EntityType>
+        <EntityType Name="Fournisseur">
+          <Key>
+            <PropertyRef Name="frns_Code" />
+          </Key>
+          <Property Name="frns_Code" Type="Int32" Nullable="false" />
+          <Property Name="frns_Nom" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="frns_Adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="frns_Adresse2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="frns_Code_Postal" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="frns_Ville" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="frns_Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="frns_GSM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="frns_GSM2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="frns_Fixe1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="frns_Fixe2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bon_Livraison" Relationship="Self.FK_Bon_Livraison_Fournisseur" FromRole="Fournisseur" ToRole="Bon_Livraison" />
+          <NavigationProperty Name="Mvt_Stock" Relationship="Self.FK_Mvt_Stock_Fournisseur" FromRole="Fournisseur" ToRole="Mvt_Stock" />
+        </EntityType>
+        <EntityType Name="Magasin">
+          <Key>
+            <PropertyRef Name="mags_Code" />
+          </Key>
+          <Property Name="mags_Code" Type="Int32" Nullable="false" />
+          <Property Name="mags_Magasin" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="mags_Ville" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Emplacements" Relationship="Self.FK_Emplacement_Magasin" FromRole="Magasin" ToRole="Emplacement" />
+          <NavigationProperty Name="Services" Relationship="Self.FK_Service_Magasin" FromRole="Magasin" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Mvt_Stock">
+          <Key>
+            <PropertyRef Name="mvt_Code" />
+          </Key>
+          <Property Name="mvt_Code" Type="Int32" Nullable="false" />
+          <Property Name="mvt_Date" Type="DateTime" Precision="0" />
+          <Property Name="mvt_Doc_Refference" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="frns_Code" Type="Int32" />
+          <Property Name="unit_Code" Type="Int32" />
+          <Property Name="typ_Code" Type="Int32" />
+          <Property Name="mvt_Qte_Demandee" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="mvt_Qte_Livree" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="msr_Code" Type="Int32" />
+          <Property Name="bl_A_Code" Type="Int32" />
+          <Property Name="mvt_Obsrvation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BL_Article" Relationship="Self.FK_Mvt_Stock_Mvt_Stock" FromRole="Mvt_Stock" ToRole="BL_Article" />
+          <NavigationProperty Name="Fournisseur" Relationship="Self.FK_Mvt_Stock_Fournisseur" FromRole="Mvt_Stock" ToRole="Fournisseur" />
+          <NavigationProperty Name="Operation_Type" Relationship="Self.FK_Mvt_Stock_Operation_Type" FromRole="Mvt_Stock" ToRole="Operation_Type" />
+          <NavigationProperty Name="Unite" Relationship="Self.FK_Mvt_Stock_Unite" FromRole="Mvt_Stock" ToRole="Unite" />
+          <NavigationProperty Name="Unite_Mesure" Relationship="Self.FK_Mvt_Stock_Unite_Mesure" FromRole="Mvt_Stock" ToRole="Unite_Mesure" />
+        </EntityType>
+        <EntityType Name="Operation_Type">
+          <Key>
+            <PropertyRef Name="typ_Code" />
+          </Key>
+          <Property Name="typ_Code" Type="Int32" Nullable="false" />
+          <Property Name="typ_Designation" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bon_Livraison" Relationship="Self.FK_Bon_Livraison_Operation_Type" FromRole="Operation_Type" ToRole="Bon_Livraison" />
+          <NavigationProperty Name="CodeBarres" Relationship="Self.FK_CodeBarre_Operation_Type" FromRole="Operation_Type" ToRole="CodeBarre" />
+          <NavigationProperty Name="Mvt_Stock" Relationship="Self.FK_Mvt_Stock_Operation_Type" FromRole="Operation_Type" ToRole="Mvt_Stock" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="pho_Code" />
+          </Key>
+          <Property Name="pho_Code" Type="Int32" Nullable="false" />
+          <Property Name="pho_Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="pho_Nom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="art_Code" Type="Int32" />
+          <NavigationProperty Name="Article" Relationship="Self.FK_Photo_Article" FromRole="Photo" ToRole="Article" />
+        </EntityType>
+        <EntityType Name="Rayonnage">
+          <Key>
+            <PropertyRef Name="rayo_Code" />
+          </Key>
+          <Property Name="rayo_Code" Type="Int32" Nullable="false" />
+          <Property Name="rayo_Designation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="etgr_Code" Type="Int32" />
+          <NavigationProperty Name="Emplacements" Relationship="Self.FK_Emplacement_Rayonnage" FromRole="Rayonnage" ToRole="Emplacement" />
+          <NavigationProperty Name="Etager" Relationship="Self.FK_Rayonnage_Etager" FromRole="Rayonnage" ToRole="Etager" />
+        </EntityType>
+        <EntityType Name="Reference">
+          <Key>
+            <PropertyRef Name="ref_Code" />
+          </Key>
+          <Property Name="ref_Code" Type="Int32" Nullable="false" />
+          <Property Name="art_Code" Type="Int32" />
+          <Property Name="ref_reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ref_Qte" Type="Int32" />
+          <NavigationProperty Name="Article" Relationship="Self.FK_Reference_Article" FromRole="Reference" ToRole="Article" />
+          <NavigationProperty Name="BL_Article" Relationship="Self.FK_BL_Article_Reference" FromRole="Reference" ToRole="BL_Article" />
+          <NavigationProperty Name="CodeBarres" Relationship="Self.FK_CodeBarre_Reference" FromRole="Reference" ToRole="CodeBarre" />
+          <NavigationProperty Name="Emplacements" Relationship="Self.FK_Emplacement_Reference" FromRole="Reference" ToRole="Emplacement" />
+          <NavigationProperty Name="Vehicules" Relationship="Self.FK_Vehicule_Reference" FromRole="Reference" ToRole="Vehicule" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="svc_Code" />
+          </Key>
+          <Property Name="svc_Code" Type="Int32" Nullable="false" />
+          <Property Name="svc_Designation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="mags_Code" Type="Int32" />
+          <NavigationProperty Name="Articles" Relationship="Self.FK_Article_Service" FromRole="Service" ToRole="Article" />
+          <NavigationProperty Name="Magasin" Relationship="Self.FK_Service_Magasin" FromRole="Service" ToRole="Magasin" />
+        </EntityType>
+        <EntityType Name="Unite">
+          <Key>
+            <PropertyRef Name="unit_Code" />
+          </Key>
+          <Property Name="unit_Code" Type="Int32" Nullable="false" />
+          <Property Name="unit_Unite" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="unit_Ville" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bon_Livraison" Relationship="Self.FK_Bon_Livraison_Unite" FromRole="Unite" ToRole="Bon_Livraison" />
+          <NavigationProperty Name="Mvt_Stock" Relationship="Self.FK_Mvt_Stock_Unite" FromRole="Unite" ToRole="Mvt_Stock" />
+        </EntityType>
+        <EntityType Name="Unite_Mesure">
+          <Key>
+            <PropertyRef Name="msr_Code" />
+          </Key>
+          <Property Name="msr_Code" Type="Int32" Nullable="false" />
+          <Property Name="msr_Unite_Mesure" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="msr_Abreviation" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Articles" Relationship="Self.FK_Article_Unite_Mesure" FromRole="Unite_Mesure" ToRole="Article" />
+          <NavigationProperty Name="Mvt_Stock" Relationship="Self.FK_Mvt_Stock_Unite_Mesure" FromRole="Unite_Mesure" ToRole="Mvt_Stock" />
+        </EntityType>
+        <EntityType Name="Vehicule">
+          <Key>
+            <PropertyRef Name="Veh_Code" />
+          </Key>
+          <Property Name="Veh_Code" Type="Int32" Nullable="false" />
+          <Property Name="Veh_Vehicule" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ref_Code" Type="Int32" />
+          <NavigationProperty Name="Reference" Relationship="Self.FK_Vehicule_Reference" FromRole="Vehicule" ToRole="Reference" />
+        </EntityType>
+        <Association Name="FK_Article_Famille">
+          <End Role="Famille" Type="Self.Famille" Multiplicity="0..1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Famille">
+              <PropertyRef Name="fam_Code" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="fam_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Article_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="svc_Code" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="svc_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Article_Unite_Mesure">
+          <End Role="Unite_Mesure" Type="Self.Unite_Mesure" Multiplicity="0..1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unite_Mesure">
+              <PropertyRef Name="msr_Code" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="msr_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BL_Article_Article">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="BL_Article" Type="Self.BL_Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="art_Code" />
+            </Principal>
+            <Dependent Role="BL_Article">
+              <PropertyRef Name="art_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_Article">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="art_Code" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="art_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reference_Article">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="Reference" Type="Self.Reference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="art_Code" />
+            </Principal>
+            <Dependent Role="Reference">
+              <PropertyRef Name="art_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BL_Article_Bon_Livraison">
+          <End Role="Bon_Livraison" Type="Self.Bon_Livraison" Multiplicity="0..1" />
+          <End Role="BL_Article" Type="Self.BL_Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bon_Livraison">
+              <PropertyRef Name="bl_Code" />
+            </Principal>
+            <Dependent Role="BL_Article">
+              <PropertyRef Name="bl_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BL_Article_CodeBarre">
+          <End Role="CodeBarre" Type="Self.CodeBarre" Multiplicity="0..1" />
+          <End Role="BL_Article" Type="Self.BL_Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CodeBarre">
+              <PropertyRef Name="cb_code" />
+            </Principal>
+            <Dependent Role="BL_Article">
+              <PropertyRef Name="cb_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BL_Article_Reference">
+          <End Role="Reference" Type="Self.Reference" Multiplicity="0..1" />
+          <End Role="BL_Article" Type="Self.BL_Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reference">
+              <PropertyRef Name="ref_Code" />
+            </Principal>
+            <Dependent Role="BL_Article">
+              <PropertyRef Name="ref_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mvt_Stock_Mvt_Stock">
+          <End Role="BL_Article" Type="Self.BL_Article" Multiplicity="0..1" />
+          <End Role="Mvt_Stock" Type="Self.Mvt_Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BL_Article">
+              <PropertyRef Name="bl_A_Code" />
+            </Principal>
+            <Dependent Role="Mvt_Stock">
+              <PropertyRef Name="bl_A_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bon_Livraison_Fournisseur">
+          <End Role="Fournisseur" Type="Self.Fournisseur" Multiplicity="0..1" />
+          <End Role="Bon_Livraison" Type="Self.Bon_Livraison" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fournisseur">
+              <PropertyRef Name="frns_Code" />
+            </Principal>
+            <Dependent Role="Bon_Livraison">
+              <PropertyRef Name="frns_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bon_Livraison_Operation_Type">
+          <End Role="Operation_Type" Type="Self.Operation_Type" Multiplicity="0..1" />
+          <End Role="Bon_Livraison" Type="Self.Bon_Livraison" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation_Type">
+              <PropertyRef Name="typ_Code" />
+            </Principal>
+            <Dependent Role="Bon_Livraison">
+              <PropertyRef Name="typ_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bon_Livraison_Unite">
+          <End Role="Unite" Type="Self.Unite" Multiplicity="0..1" />
+          <End Role="Bon_Livraison" Type="Self.Bon_Livraison" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unite">
+              <PropertyRef Name="unit_Code" />
+            </Principal>
+            <Dependent Role="Bon_Livraison">
+              <PropertyRef Name="unit_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CodeBarre_Operation_Type">
+          <End Role="Operation_Type" Type="Self.Operation_Type" Multiplicity="0..1" />
+          <End Role="CodeBarre" Type="Self.CodeBarre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation_Type">
+              <PropertyRef Name="typ_Code" />
+            </Principal>
+            <Dependent Role="CodeBarre">
+              <PropertyRef Name="typ_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CodeBarre_Reference">
+          <End Role="Reference" Type="Self.Reference" Multiplicity="0..1" />
+          <End Role="CodeBarre" Type="Self.CodeBarre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reference">
+              <PropertyRef Name="ref_Code" />
+            </Principal>
+            <Dependent Role="CodeBarre">
+              <PropertyRef Name="ref_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emplacement_Etager">
+          <End Role="Etager" Type="Self.Etager" Multiplicity="0..1" />
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etager">
+              <PropertyRef Name="etgr_Code" />
+            </Principal>
+            <Dependent Role="Emplacement">
+              <PropertyRef Name="etgr_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emplacement_Magasin">
+          <End Role="Magasin" Type="Self.Magasin" Multiplicity="0..1" />
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magasin">
+              <PropertyRef Name="mags_Code" />
+            </Principal>
+            <Dependent Role="Emplacement">
+              <PropertyRef Name="mags_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emplacement_Rayonnage">
+          <End Role="Rayonnage" Type="Self.Rayonnage" Multiplicity="0..1" />
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rayonnage">
+              <PropertyRef Name="rayo_Code" />
+            </Principal>
+            <Dependent Role="Emplacement">
+              <PropertyRef Name="rayo_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emplacement_Reference">
+          <End Role="Reference" Type="Self.Reference" Multiplicity="0..1" />
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reference">
+              <PropertyRef Name="ref_Code" />
+            </Principal>
+            <Dependent Role="Emplacement">
+              <PropertyRef Name="ref_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rayonnage_Etager">
+          <End Role="Etager" Type="Self.Etager" Multiplicity="0..1" />
+          <End Role="Rayonnage" Type="Self.Rayonnage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etager">
+              <PropertyRef Name="etgr_Code" />
+            </Principal>
+            <Dependent Role="Rayonnage">
+              <PropertyRef Name="etgr_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mvt_Stock_Fournisseur">
+          <End Role="Fournisseur" Type="Self.Fournisseur" Multiplicity="0..1" />
+          <End Role="Mvt_Stock" Type="Self.Mvt_Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fournisseur">
+              <PropertyRef Name="frns_Code" />
+            </Principal>
+            <Dependent Role="Mvt_Stock">
+              <PropertyRef Name="frns_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Magasin">
+          <End Role="Magasin" Type="Self.Magasin" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magasin">
+              <PropertyRef Name="mags_Code" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="mags_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mvt_Stock_Operation_Type">
+          <End Role="Operation_Type" Type="Self.Operation_Type" Multiplicity="0..1" />
+          <End Role="Mvt_Stock" Type="Self.Mvt_Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation_Type">
+              <PropertyRef Name="typ_Code" />
+            </Principal>
+            <Dependent Role="Mvt_Stock">
+              <PropertyRef Name="typ_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mvt_Stock_Unite">
+          <End Role="Unite" Type="Self.Unite" Multiplicity="0..1" />
+          <End Role="Mvt_Stock" Type="Self.Mvt_Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unite">
+              <PropertyRef Name="unit_Code" />
+            </Principal>
+            <Dependent Role="Mvt_Stock">
+              <PropertyRef Name="unit_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mvt_Stock_Unite_Mesure">
+          <End Role="Unite_Mesure" Type="Self.Unite_Mesure" Multiplicity="0..1" />
+          <End Role="Mvt_Stock" Type="Self.Mvt_Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unite_Mesure">
+              <PropertyRef Name="msr_Code" />
+            </Principal>
+            <Dependent Role="Mvt_Stock">
+              <PropertyRef Name="msr_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicule_Reference">
+          <End Role="Reference" Type="Self.Reference" Multiplicity="0..1" />
+          <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reference">
+              <PropertyRef Name="ref_Code" />
+            </Principal>
+            <Dependent Role="Vehicule">
+              <PropertyRef Name="ref_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="gesStock_FAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articles" EntityType="Self.Article" />
+          <EntitySet Name="BL_Article" EntityType="Self.BL_Article" />
+          <EntitySet Name="Bon_Livraison" EntityType="Self.Bon_Livraison" />
+          <EntitySet Name="CodeBarres" EntityType="Self.CodeBarre" />
+          <EntitySet Name="Emplacements" EntityType="Self.Emplacement" />
+          <EntitySet Name="Etagers" EntityType="Self.Etager" />
+          <EntitySet Name="Familles" EntityType="Self.Famille" />
+          <EntitySet Name="Fournisseurs" EntityType="Self.Fournisseur" />
+          <EntitySet Name="Magasins" EntityType="Self.Magasin" />
+          <EntitySet Name="Mvt_Stock" EntityType="Self.Mvt_Stock" />
+          <EntitySet Name="Operation_Type" EntityType="Self.Operation_Type" />
+          <EntitySet Name="Photos" EntityType="Self.Photo" />
+          <EntitySet Name="Rayonnages" EntityType="Self.Rayonnage" />
+          <EntitySet Name="References" EntityType="Self.Reference" />
+          <EntitySet Name="Services" EntityType="Self.Service" />
+          <EntitySet Name="Unites" EntityType="Self.Unite" />
+          <EntitySet Name="Unite_Mesure" EntityType="Self.Unite_Mesure" />
+          <EntitySet Name="Vehicules" EntityType="Self.Vehicule" />
+          <AssociationSet Name="FK_Article_Famille" Association="Self.FK_Article_Famille">
+            <End Role="Famille" EntitySet="Familles" />
+            <End Role="Article" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Article_Service" Association="Self.FK_Article_Service">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="Article" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Article_Unite_Mesure" Association="Self.FK_Article_Unite_Mesure">
+            <End Role="Unite_Mesure" EntitySet="Unite_Mesure" />
+            <End Role="Article" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BL_Article_Article" Association="Self.FK_BL_Article_Article">
+            <End Role="Article" EntitySet="Articles" />
+            <End Role="BL_Article" EntitySet="BL_Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_Article" Association="Self.FK_Photo_Article">
+            <End Role="Article" EntitySet="Articles" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_Article" Association="Self.FK_Reference_Article">
+            <End Role="Article" EntitySet="Articles" />
+            <End Role="Reference" EntitySet="References" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BL_Article_Bon_Livraison" Association="Self.FK_BL_Article_Bon_Livraison">
+            <End Role="Bon_Livraison" EntitySet="Bon_Livraison" />
+            <End Role="BL_Article" EntitySet="BL_Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BL_Article_CodeBarre" Association="Self.FK_BL_Article_CodeBarre">
+            <End Role="CodeBarre" EntitySet="CodeBarres" />
+            <End Role="BL_Article" EntitySet="BL_Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BL_Article_Reference" Association="Self.FK_BL_Article_Reference">
+            <End Role="Reference" EntitySet="References" />
+            <End Role="BL_Article" EntitySet="BL_Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mvt_Stock_Mvt_Stock" Association="Self.FK_Mvt_Stock_Mvt_Stock">
+            <End Role="BL_Article" EntitySet="BL_Article" />
+            <End Role="Mvt_Stock" EntitySet="Mvt_Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bon_Livraison_Fournisseur" Association="Self.FK_Bon_Livraison_Fournisseur">
+            <End Role="Fournisseur" EntitySet="Fournisseurs" />
+            <End Role="Bon_Livraison" EntitySet="Bon_Livraison" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bon_Livraison_Operation_Type" Association="Self.FK_Bon_Livraison_Operation_Type">
+            <End Role="Operation_Type" EntitySet="Operation_Type" />
+            <End Role="Bon_Livraison" EntitySet="Bon_Livraison" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bon_Livraison_Unite" Association="Self.FK_Bon_Livraison_Unite">
+            <End Role="Unite" EntitySet="Unites" />
+            <End Role="Bon_Livraison" EntitySet="Bon_Livraison" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CodeBarre_Operation_Type" Association="Self.FK_CodeBarre_Operation_Type">
+            <End Role="Operation_Type" EntitySet="Operation_Type" />
+            <End Role="CodeBarre" EntitySet="CodeBarres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CodeBarre_Reference" Association="Self.FK_CodeBarre_Reference">
+            <End Role="Reference" EntitySet="References" />
+            <End Role="CodeBarre" EntitySet="CodeBarres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emplacement_Etager" Association="Self.FK_Emplacement_Etager">
+            <End Role="Etager" EntitySet="Etagers" />
+            <End Role="Emplacement" EntitySet="Emplacements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emplacement_Magasin" Association="Self.FK_Emplacement_Magasin">
+            <End Role="Magasin" EntitySet="Magasins" />
+            <End Role="Emplacement" EntitySet="Emplacements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emplacement_Rayonnage" Association="Self.FK_Emplacement_Rayonnage">
+            <End Role="Rayonnage" EntitySet="Rayonnages" />
+            <End Role="Emplacement" EntitySet="Emplacements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emplacement_Reference" Association="Self.FK_Emplacement_Reference">
+            <End Role="Reference" EntitySet="References" />
+            <End Role="Emplacement" EntitySet="Emplacements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rayonnage_Etager" Association="Self.FK_Rayonnage_Etager">
+            <End Role="Etager" EntitySet="Etagers" />
+            <End Role="Rayonnage" EntitySet="Rayonnages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mvt_Stock_Fournisseur" Association="Self.FK_Mvt_Stock_Fournisseur">
+            <End Role="Fournisseur" EntitySet="Fournisseurs" />
+            <End Role="Mvt_Stock" EntitySet="Mvt_Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Magasin" Association="Self.FK_Service_Magasin">
+            <End Role="Magasin" EntitySet="Magasins" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mvt_Stock_Operation_Type" Association="Self.FK_Mvt_Stock_Operation_Type">
+            <End Role="Operation_Type" EntitySet="Operation_Type" />
+            <End Role="Mvt_Stock" EntitySet="Mvt_Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mvt_Stock_Unite" Association="Self.FK_Mvt_Stock_Unite">
+            <End Role="Unite" EntitySet="Unites" />
+            <End Role="Mvt_Stock" EntitySet="Mvt_Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mvt_Stock_Unite_Mesure" Association="Self.FK_Mvt_Stock_Unite_Mesure">
+            <End Role="Unite_Mesure" EntitySet="Unite_Mesure" />
+            <End Role="Mvt_Stock" EntitySet="Mvt_Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicule_Reference" Association="Self.FK_Vehicule_Reference">
+            <End Role="Reference" EntitySet="References" />
+            <End Role="Vehicule" EntitySet="Vehicules" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="gesStock_FAModelStoreContainer" CdmEntityContainer="gesStock_FAEntities">
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Article">
+              <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="art_Code" ColumnName="art_Code" />
+                <ScalarProperty Name="art_Designatiion" ColumnName="art_Designatiion" />
+                <ScalarProperty Name="art_Description" ColumnName="art_Description" />
+                <ScalarProperty Name="svc_Code" ColumnName="svc_Code" />
+                <ScalarProperty Name="fam_Code" ColumnName="fam_Code" />
+                <ScalarProperty Name="msr_Code" ColumnName="msr_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BL_Article">
+            <EntityTypeMapping TypeName="gesStock_FAModel.BL_Article">
+              <MappingFragment StoreEntitySet="BL_Article">
+                <ScalarProperty Name="bl_A_Code" ColumnName="bl_A_Code" />
+                <ScalarProperty Name="bl_A_Date" ColumnName="bl_A_Date" />
+                <ScalarProperty Name="bl_Code" ColumnName="bl_Code" />
+                <ScalarProperty Name="art_Code" ColumnName="art_Code" />
+                <ScalarProperty Name="ref_Code" ColumnName="ref_Code" />
+                <ScalarProperty Name="cb_Code" ColumnName="cb_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bon_Livraison">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Bon_Livraison">
+              <MappingFragment StoreEntitySet="Bon_Livraison">
+                <ScalarProperty Name="bl_Code" ColumnName="bl_Code" />
+                <ScalarProperty Name="bl_Date" ColumnName="bl_Date" />
+                <ScalarProperty Name="bl_Reference" ColumnName="bl_Reference" />
+                <ScalarProperty Name="frns_Code" ColumnName="frns_Code" />
+                <ScalarProperty Name="unit_Code" ColumnName="unit_Code" />
+                <ScalarProperty Name="typ_Code" ColumnName="typ_Code" />
+                <ScalarProperty Name="bl_Description" ColumnName="bl_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CodeBarres">
+            <EntityTypeMapping TypeName="gesStock_FAModel.CodeBarre">
+              <MappingFragment StoreEntitySet="CodeBarre">
+                <ScalarProperty Name="cb_code" ColumnName="cb_code" />
+                <ScalarProperty Name="cb_Date" ColumnName="cb_Date" />
+                <ScalarProperty Name="cb_Designation" ColumnName="cb_Designation" />
+                <ScalarProperty Name="ref_Code" ColumnName="ref_Code" />
+                <ScalarProperty Name="typ_Code" ColumnName="typ_Code" />
+                <ScalarProperty Name="cb_Status" ColumnName="cb_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emplacements">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Emplacement">
+              <MappingFragment StoreEntitySet="Emplacement">
+                <ScalarProperty Name="eplc_Code" ColumnName="eplc_Code" />
+                <ScalarProperty Name="eplc_Date" ColumnName="eplc_Date" />
+                <ScalarProperty Name="ref_Code" ColumnName="ref_Code" />
+                <ScalarProperty Name="rayo_Code" ColumnName="rayo_Code" />
+                <ScalarProperty Name="etgr_Code" ColumnName="etgr_Code" />
+                <ScalarProperty Name="mags_Code" ColumnName="mags_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Etagers">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Etager">
+              <MappingFragment StoreEntitySet="Etager">
+                <ScalarProperty Name="etgr_Code" ColumnName="etgr_Code" />
+                <ScalarProperty Name="etgr_Designation" ColumnName="etgr_Designation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Familles">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Famille">
+              <MappingFragment StoreEntitySet="Famille">
+                <ScalarProperty Name="fam_Code" ColumnName="fam_Code" />
+                <ScalarProperty Name="fam_Designation" ColumnName="fam_Designation" />
+                <ScalarProperty Name="fam_Description" ColumnName="fam_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fournisseurs">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Fournisseur">
+              <MappingFragment StoreEntitySet="Fournisseur">
+                <ScalarProperty Name="frns_Code" ColumnName="frns_Code" />
+                <ScalarProperty Name="frns_Nom" ColumnName="frns_Nom" />
+                <ScalarProperty Name="frns_Adresse" ColumnName="frns_Adresse" />
+                <ScalarProperty Name="frns_Adresse2" ColumnName="frns_Adresse2" />
+                <ScalarProperty Name="frns_Code_Postal" ColumnName="frns_Code_Postal" />
+                <ScalarProperty Name="frns_Ville" ColumnName="frns_Ville" />
+                <ScalarProperty Name="frns_Email" ColumnName="frns_Email" />
+                <ScalarProperty Name="frns_GSM" ColumnName="frns_GSM" />
+                <ScalarProperty Name="frns_GSM2" ColumnName="frns_GSM2" />
+                <ScalarProperty Name="frns_Fixe1" ColumnName="frns_Fixe1" />
+                <ScalarProperty Name="frns_Fixe2" ColumnName="frns_Fixe2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Magasins">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Magasin">
+              <MappingFragment StoreEntitySet="Magasin">
+                <ScalarProperty Name="mags_Code" ColumnName="mags_Code" />
+                <ScalarProperty Name="mags_Magasin" ColumnName="mags_Magasin" />
+                <ScalarProperty Name="mags_Ville" ColumnName="mags_Ville" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mvt_Stock">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Mvt_Stock">
+              <MappingFragment StoreEntitySet="Mvt_Stock">
+                <ScalarProperty Name="mvt_Code" ColumnName="mvt_Code" />
+                <ScalarProperty Name="mvt_Date" ColumnName="mvt_Date" />
+                <ScalarProperty Name="mvt_Doc_Refference" ColumnName="mvt_Doc_Refference" />
+                <ScalarProperty Name="frns_Code" ColumnName="frns_Code" />
+                <ScalarProperty Name="unit_Code" ColumnName="unit_Code" />
+                <ScalarProperty Name="typ_Code" ColumnName="typ_Code" />
+                <ScalarProperty Name="mvt_Qte_Demandee" ColumnName="mvt_Qte_Demandee" />
+                <ScalarProperty Name="mvt_Qte_Livree" ColumnName="mvt_Qte_Livree" />
+                <ScalarProperty Name="msr_Code" ColumnName="msr_Code" />
+                <ScalarProperty Name="bl_A_Code" ColumnName="bl_A_Code" />
+                <ScalarProperty Name="mvt_Obsrvation" ColumnName="mvt_Obsrvation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Operation_Type">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Operation_Type">
+              <MappingFragment StoreEntitySet="Operation_Type">
+                <ScalarProperty Name="typ_Code" ColumnName="typ_Code" />
+                <ScalarProperty Name="typ_Designation" ColumnName="typ_Designation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Photo">
+              <MappingFragment StoreEntitySet="Photo">
+                <ScalarProperty Name="pho_Code" ColumnName="pho_Code" />
+                <ScalarProperty Name="pho_Path" ColumnName="pho_Path" />
+                <ScalarProperty Name="pho_Nom" ColumnName="pho_Nom" />
+                <ScalarProperty Name="art_Code" ColumnName="art_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rayonnages">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Rayonnage">
+              <MappingFragment StoreEntitySet="Rayonnage">
+                <ScalarProperty Name="rayo_Code" ColumnName="rayo_Code" />
+                <ScalarProperty Name="rayo_Designation" ColumnName="rayo_Designation" />
+                <ScalarProperty Name="etgr_Code" ColumnName="etgr_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="References">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Reference">
+              <MappingFragment StoreEntitySet="Reference">
+                <ScalarProperty Name="ref_Code" ColumnName="ref_Code" />
+                <ScalarProperty Name="art_Code" ColumnName="art_Code" />
+                <ScalarProperty Name="ref_reference" ColumnName="ref_reference" />
+                <ScalarProperty Name="ref_Qte" ColumnName="ref_Qte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="svc_Code" ColumnName="svc_Code" />
+                <ScalarProperty Name="svc_Designation" ColumnName="svc_Designation" />
+                <ScalarProperty Name="mags_Code" ColumnName="mags_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Unites">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Unite">
+              <MappingFragment StoreEntitySet="Unite">
+                <ScalarProperty Name="unit_Code" ColumnName="unit_Code" />
+                <ScalarProperty Name="unit_Unite" ColumnName="unit_Unite" />
+                <ScalarProperty Name="unit_Ville" ColumnName="unit_Ville" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Unite_Mesure">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Unite_Mesure">
+              <MappingFragment StoreEntitySet="Unite_Mesure">
+                <ScalarProperty Name="msr_Code" ColumnName="msr_Code" />
+                <ScalarProperty Name="msr_Unite_Mesure" ColumnName="msr_Unite_Mesure" />
+                <ScalarProperty Name="msr_Abreviation" ColumnName="msr_Abreviation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicules">
+            <EntityTypeMapping TypeName="gesStock_FAModel.Vehicule">
+              <MappingFragment StoreEntitySet="Vehicule">
+                <ScalarProperty Name="Veh_Code" ColumnName="Veh_Code" />
+                <ScalarProperty Name="Veh_Vehicule" ColumnName="Veh_Vehicule" />
+                <ScalarProperty Name="ref_Code" ColumnName="ref_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -33,9 +33,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v18.1, Version=18.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v18.1.Core, Version=18.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v18.1, Version=18.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraBars.v18.1, Version=18.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v18.1, Version=18.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v18.1, Version=18.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v18.1, Version=18.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v18.1, Version=18.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -69,11 +73,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sub\frmList_BL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub\frmList_BL.Designer.cs">
+      <DependentUpon>frmList_BL.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sub\frmList_Fournisseur.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Sub\frmList_Fournisseur.Designer.cs">
       <DependentUpon>frmList_Fournisseur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sub\frm_Fournisseur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sub\frm_Fournisseur.Designer.cs">
+      <DependentUpon>frm_Fournisseur.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Main\frmListPrincipal.resx">
       <DependentUpon>frmListPrincipal.cs</DependentUpon>
@@ -95,6 +111,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Sub\frmList_BL.resx">
+      <DependentUpon>frmList_BL.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -108,7 +127,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{29a9622d-e358-4cef-bdee-83daf2b0493c}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tools\Tools.csproj">
+      <Project>{e47cc1e4-199a-4506-a97b-018e9153b9dd}</Project>
+      <Name>Tools</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\supprimer_32.png" />
   </ItemGroup>
